@@ -2,8 +2,8 @@
     <Layout class-prefix="layout">  
         <number-pad/>
         <notes/>
-        <types :propA="333"/>
-        <tags/>
+        <types/>
+        <tags :data-source="tags"/>
     </Layout>
 </template>
 
@@ -12,10 +12,16 @@ import NumberPad from '@/components/money/NumberPad.vue'
 import Notes from '@/components/money/Notes.vue'
 import Tags from '@/components/money/Tags.vue'
 import Types from '@/components/money/Types.vue'
-    export default {
-  components: { NumberPad, Notes, Tags, Types },
-        name: 'Money',
+
+export default {
+    components: { NumberPad, Notes, Tags, Types },
+    name: 'Money',
+    data(){
+        return{
+            tags:['衣','食','住','行']
+        }
     }
+}
 </script>
 
 <style lang="scss">

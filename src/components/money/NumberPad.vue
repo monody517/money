@@ -1,29 +1,57 @@
 <template>
     <div class="numberPad">
-        <div class="output">100</div>
+        <div class="output">{{output || '0'}}</div>
         <div class="buttons">
-            <button>1</button>
-            <button>2</button>
-            <button>3</button>
-            <button>删除</button>
-            <button>4</button>            
-            <button>5</button>
-            <button>6</button>
-            <button>清空</button>
-            <button>7</button>
-            <button>8</button>
-            <button>9</button>
-            <button class="ok">OK</button>
-            <button class="zero">0</button>
-            <button>.</button>
+            <button @click="inputContent">1</button>
+            <button @click="inputContent">2</button>
+            <button @click="inputContent">3</button>
+            <button @click="remove">删除</button>
+            <button @click="inputContent">4</button>            
+            <button @click="inputContent">5</button>
+            <button @click="inputContent">6</button>
+            <button @click="clear">清空</button>
+            <button @click="inputContent">7</button>
+            <button @click="inputContent">8</button>
+            <button @click="inputContent">9</button>
+            <button @click="ok" class="ok">OK</button>
+            <button @click="inputContent" class="zero">0</button>
+            <button @click="inputContent">.</button>
         </div>
     </div>
 </template>
 
-<script>
-    export default {
-        name:'NumberPad',
+<script lang="ts">
+import Vue from 'vue'
+import {Component,Prop} from 'vue-property-decorator'
+
+@Component
+export default class NumberPad extends Vue{
+    output: string= '0';
+    inputContent(event:MouseEvent){
+        const button = event.target as HTMLButtonElement
+        const text = button.textContent as string
+        if(this.output.length === 16){return}    
+        if(this.output === '0'){
+            if('0123456789'.indexOf(text)>=0){
+                this.output = text
+            }else{
+                this.output += text
+            }
+            return
+        }
+        if(this.output.indexOf('.')>=0 && text === '.'){return}
+        this.output += text
     }
+    remove(){
+        this.output = this.output.substring(0, this.output.length - 1);
+    }
+    clear(){
+        this.output = ''
+    }
+    ok(){
+
+    }
+}
 </script>
 
 <style lang="scss" scoped>
