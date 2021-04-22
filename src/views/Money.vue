@@ -2,7 +2,7 @@
     <Layout class-prefix="layout">  
         <number-pad/>
         <notes/>
-        <types/>
+        <types :propA="333"/>
         <tags/>
     </Layout>
 </template>
