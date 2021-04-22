@@ -26,14 +26,13 @@ export default class Types extends Vue{
 
 <style lang="scss" scoped>
 .types{
-    background: #c4c4c4;
     display: flex;
     text-align: center;
 
     font-size: 24px;
     > li{
         width: 50%;
-        height: 64px;
+        height: 54px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -43,7 +42,7 @@ export default class Types extends Vue{
             position: absolute;
             width: 100%;
             height: 4px;
-            background: #444;
+            background: #FCE300;
             bottom: 0;
             left: 0;
         }

@@ -1,9 +1,9 @@
 <template>
     <Layout class-prefix="layout">  
         <number-pad/>
-        <notes/>
+        <notes/> 
+        <tags :data-source.sync="tags"/>
         <types/>
-        <tags :data-source="tags"/>
     </Layout>
 </template>
 
@@ -18,7 +18,7 @@ export default {
     name: 'Money',
     data(){
         return{
-            tags:['衣','食','住','行']
+            tags:['餐饮','购物','家居','水果','学习','房租']
         }
     }
 }
@@ -26,7 +26,6 @@ export default {
 
 <style lang="scss">
     .layout-content{
-        border: 1px solid red;
         display: flex;
         flex-direction: column-reverse;
     }
