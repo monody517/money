@@ -1,6 +1,5 @@
 <template>
     <Layout class-prefix="layout">
-        {{RecordItemList}}
         <number-pad @update:value="onUpdateAmount" @submit="saveRecordItem"/>
         <notes 
         field-name="备注"
