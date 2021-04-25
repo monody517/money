@@ -1,16 +1,17 @@
 <template>
     <Layout class-prefix="layout">
-        <number-pad @update:value="onUpdateAmount" @submit="saveRecord"/>
+        {{RecordItemList}}
+        <number-pad @update:value="onUpdateAmount" @submit="saveRecordItem"/>
         <notes @update:value="onUpdateNotes"/> 
         <tags
         :data-source="tags"
-        :data-source2="record.type"
+        :data-source2="RecordItem.type"
         :data-source3="incomeTags"
         :new-data.sync="newTags"
         :new-data2.sync="newTags2"
         @update:newData="onUpdateTags"
         @update:newData2="onUpdateTags2"/>
-        <types :value.sync='record.type'/>
+        <types :value.sync='RecordItem.type'/>
     </Layout>
 </template>
 
@@ -20,10 +21,13 @@ import NumberPad from '@/components/money/NumberPad.vue'
 import Notes from '@/components/money/Notes.vue'
 import Tags from '@/components/money/Tags.vue'
 import Types from '@/components/money/Types.vue'
+import recordListModel from '@/model/recordListModel'
+import tagListModel from '@/model/tagListModel'
+
 
 import { Component,Watch } from 'vue-property-decorator'
 
-type Record = {
+type RecordItem = {
     tags:string[];
     incomeTags:string[];
     type:string;
@@ -34,40 +38,41 @@ type Record = {
     createdAt?: Date
 }
 
-const recordList: Record[] = JSON.parse(window.localStorage.getItem('recordList') || '[]');
+const RecordItemList = recordListModel.fetch()
+const tagList = tagListModel.fetch()
 
 @Component({
     components: { NumberPad, Notes, Tags, Types }
 })
 export default class Money extends Vue{
-    tags = ['餐饮','购物','家居','水果','学习','房租'];
-
+    // tags = ['餐饮','购物','家居','水果','学习','房租'];
+    tags = tagList
     incomeTags = ['工资','兼职','理财','礼金']
     newTags:string[] | undefined = [];
     newTags2:string[] | undefined = [];
-    record:Record = {tags:[],type:'-',notes:'',amount:0,newTags:[],incomeTags:[],newTags2:[]}
-    recordList: Record[] = recordList;
+    RecordItem:RecordItem = {tags:[],type:'-',notes:'',amount:0,newTags:[],incomeTags:[],newTags2:[]}
+    RecordItemList: RecordItem[] = RecordItemList;
 
     onUpdateTags(value:string[]){
-        this.record.newTags=value
+        this.RecordItem.newTags=value
     }
     onUpdateTags2(value:string[]){
-        this.record.newTags2=value
+        this.RecordItem.newTags2=value
     }
     onUpdateNotes(value:string){
-        this.record.notes=value
+        this.RecordItem.notes=value
     }
     onUpdateAmount(value:string){
-        this.record.amount=parseFloat(value)     
+        this.RecordItem.amount=parseFloat(value)     
     }
-    saveRecord() {
-      const record2: Record = JSON.parse(JSON.stringify(this.record));
-      record2.createdAt = new Date();
-      this.recordList.push(record2);
+    saveRecordItem() {
+      const RecordItem2:RecordItem = recordListModel.clone(this.RecordItemList);
+      RecordItem2.createdAt = new Date();
+      this.RecordItemList.push(RecordItem2);
     }
-    @Watch('recordList')
-    onRecordListChange() {
-      window.localStorage.setItem('recordList', JSON.stringify(this.recordList));
+    @Watch('RecordItemList')
+    onRecordItemListChange() {
+      recordListModel.save(this.RecordItemList)
     }
 
 }

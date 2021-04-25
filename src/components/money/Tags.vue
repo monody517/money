@@ -124,13 +124,12 @@ export default class Tags extends Vue{
             }
         }
         > .new{
-
-        > button{
-            background: transparent;
-            border: none;
-            padding: 0 4px;
+            > button{
+                background: transparent;
+                border: none;
+                padding: 0 4px;
+            }
         }
-    }
     }
     
 }
