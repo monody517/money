@@ -1,15 +1,19 @@
 <template>
     <Layout>
-        <ul class="current">
-            <li v-for="tag in tags" :key="tag.id">
+        <div class="tags">
+            <router-link 
+                class="tag"
+                v-for="tag in tags" :key="tag.id"
+                :to='`/labels/edit/${tag.id}`'
+                >
                 {{tag.name}}
             <Icon name='星星'/>
-            </li>
-            <li class="new" @click="createTag">
+            </router-link>
+            <div class="new" @click="createTag">
                 <button>新增标签</button>
                 <Icon name='添加'/>
-            </li>
-        </ul>
+            </div>
+        </div>
     </Layout>
 </template>
 
@@ -39,11 +43,11 @@ export default class Labels extends Vue{
 </script>
 
 <style lang="scss" scoped>
-.current{
+.tags{
     display: flex;
     flex-wrap: wrap;
     overflow: auto;
-    > li{
+    > .tag, .new{
         display: flex;
         $h:24px;
         width:92px;
@@ -59,15 +63,13 @@ export default class Labels extends Vue{
             width: 50px;
             height: 25px;   
             }
-            &.selected{
-                background: darken(#d9d9d9,50%);
-            }
+        &.selected{
+            background: darken(#d9d9d9,50%);
         }
-        > .new{
-            > button{
-                background: transparent;
-                border: none;
-                padding: 0 4px;
+        button{
+            background: transparent;
+            border: none;
+            padding: 0 4px;
             }
         }
 }

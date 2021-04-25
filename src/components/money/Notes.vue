@@ -1,8 +1,8 @@
 <template>
     <div>
         <label class="notes">
-            <span>备注</span>
-            <input type="text" placeholder="在这里输入备注"
+            <span>{{this.fieldName}}</span>
+            <input type="text" :placeholder='this.placeholder'
             v-model="value" 
             >
         </label>
@@ -11,11 +11,13 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import {Component,Watch} from 'vue-property-decorator'
+import {Component,Watch,Prop} from 'vue-property-decorator'
 
 @Component
 export default class Notes extends Vue{
-    value:string ='';
+    value ='';
+    @Prop({required:true}) fieldName!:string
+    @Prop() placeholder?:string
     @Watch('value')
     onValueChange(value:string,){
         this.$emit('update:value',value)

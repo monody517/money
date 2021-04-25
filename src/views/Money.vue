@@ -2,7 +2,10 @@
     <Layout class-prefix="layout">
         {{RecordItemList}}
         <number-pad @update:value="onUpdateAmount" @submit="saveRecordItem"/>
-        <notes @update:value="onUpdateNotes"/> 
+        <notes 
+        field-name="备注"
+        placeholder="在这里输入备注"
+        @update:value="onUpdateNotes"/> 
         <tags
         :data-source="tags"
         :data-source2="RecordItem.type"

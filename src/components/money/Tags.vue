@@ -4,7 +4,7 @@
         <ul class="current" v-if="dataSource2 === '-'">
 
             <li :class="{selected:selectedTags.indexOf(item)>=0}"
-            v-for="item in dataSource" :key="item" @click="select(item)">
+            v-for="item in dataSource" :key="item.id" @click="select(item)">
             {{item}}   
             <Icon :name='`${item}`'/>
             </li>
