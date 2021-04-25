@@ -1,8 +1,8 @@
 <template>
     <Layout>
         <ul class="current">
-            <li v-for="tag in tags" :key="tag">
-                {{tag}}
+            <li v-for="tag in tags" :key="tag.id">
+                {{tag.name}}
             <Icon name='星星'/>
             </li>
             <li class="new" @click="createTag">
