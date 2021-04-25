@@ -23,12 +23,12 @@
             <Icon :name='`${item}`'/>
             </li>
             <li :class="{selected:selectedTags.indexOf(item)>=0}" 
-                v-for="item in newData" :key="item" @click="select(item)">
+                v-for="item in newData2" :key="item" @click="select(item)">
                 {{item}}
                 <Icon name='星星'/>
             </li>
             <li class="new">
-                <button @click="create">新增标签</button>
+                <button @click="create2">新增标签</button>
                  <Icon name='添加'/>
             </li>
         </ul>
@@ -45,6 +45,7 @@ export default class Tags extends Vue{
     @Prop() readonly dataSource2:string[] | undefined;
     @Prop() readonly dataSource3:string[] | undefined;
     @Prop() readonly newData:string[] | undefined;
+    @Prop() readonly newData2:string[] | undefined;
 
     selectedTags:string[] = [];
     select(tag:string){
@@ -65,6 +66,17 @@ export default class Tags extends Vue{
             this.$emit('update:newData',[...this.newData,name]);
         }
     }
+    create2(){
+        const name = window.prompt('请输入标签名')
+        if(name === ''){
+            window.alert('标签名不能为空')
+        }else if(name === null){
+            return
+        }
+        else if(this.newData2){
+            this.$emit('update:newData2',[...this.newData2,name]);
+        }
+    }
 }
 </script>
 
@@ -81,13 +93,11 @@ export default class Tags extends Vue{
         overflow: hidden;
         height: 150px;
         overflow: auto;
-        ::-webkit-scrollbar{
-            width: 0;
-        }
         > li{
             display: flex;
-            $h:24px;;
+            $h:24px;
             width:92px;
+            height: 46px;
             border-radius: $h/2;
             margin-right: 20px;
             margin-top: 4px;
