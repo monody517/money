@@ -14,10 +14,10 @@
                 {{item}}
                 <Icon name='星星'/>
             </li>
-            <li class="new">
-                <button @click="create">新增标签</button>
-                 <Icon name='添加'/>
-            </li>
+            <div @click="create">
+                <Button button-name="新增标签" icon-name="添加"/>
+            </div>
+            
         </ul>
         <ul class="current" v-if="dataSource2 === '+'">
             <li :class="{selected:selectedTags.indexOf(item)>=0}"
@@ -30,10 +30,9 @@
                 {{item}}
                 <Icon name='星星'/>
             </li>
-            <li class="new">
-                <button @click="create2">新增标签</button>
-                 <Icon name='添加'/>
-            </li>
+            <div @click="create2">
+                <Button button-name="新增标签" icon-name="添加"/>
+            </div>
         </ul>
     </div>
 </template>
@@ -41,8 +40,9 @@
 <script lang="ts">
 import Vue from 'vue'
 import {Component,Prop} from 'vue-property-decorator'
+import Button from '@/components/Button.vue'
 
-@Component
+@Component({components:{Button}})
 export default class Tags extends Vue{
     @Prop() readonly dataSource:string[] | undefined;
     @Prop() readonly dataSource2:string[] | undefined;

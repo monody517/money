@@ -1,17 +1,18 @@
 <template>
     <div class="new">
-        <button>新增标签</button>
-        <Icon name='添加'/>
+        <button><span>{{ButtonName}}</span></button>
+        <Icon :name= '`${IconName}`' />
     </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import {Component} from 'vue-property-decorator'
+import {Component,Prop} from 'vue-property-decorator'
 
 @Component
 export default class Button extends Vue{
-
+    @Prop({required:true}) ButtonName!:string
+    @Prop({required:true}) IconName!:string
 }
 </script>
 

@@ -9,9 +9,8 @@
                 {{tag.name}}
             <Icon name='星星'/>
             </router-link>
-            <div class="new" @click="createTag">
-                <button>新增标签</button>
-                <Icon name='添加'/>
+            <div @click="createTag">
+                <Button button-name="新增标签" icon-name="添加"/>
             </div>
         </div>
     </Layout>
@@ -21,12 +20,12 @@
 import Vue from 'vue'
 import {Component} from 'vue-property-decorator'
 import tagListModel from '@/model/tagListModel'
+import Button from '@/components/Button.vue'
 
 
-
-@Component
+@Component({components:{Button}})
 export default class Labels extends Vue{
-    tags = tagListModel.data
+    tags = tagListModel.data;
     createTag(){
         const name = window.prompt('请输入标签名')
         if(name){
