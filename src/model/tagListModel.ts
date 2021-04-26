@@ -8,7 +8,7 @@ type Tag = {
 }
 type TagListModel = {
     data:Tag[];
-    fetch:()=>string[];
+    fetch:()=>Tag[];
     create:(name:string)=>string;
     update:(id:string,name:string)=> 'success' | 'not found' | 'duplicated'
     remove:(id:string)=> boolean
@@ -17,10 +17,8 @@ type TagListModel = {
 const tagListModel:TagListModel = {
     data:[],
     fetch(){
-        return JSON.parse(window.localStorage.getItem(localStorageKeyName) || '[]');
-    },
-    save(){
-        window.localStorage.setItem(localStorageKeyName, JSON.stringify(this.data));
+        this.data = JSON.parse(window.localStorage.getItem(localStorageKeyName) || '[]');
+        return this.data;
     },
     create(name:string){
         const names = this.data.map(item => item.name)
@@ -55,11 +53,12 @@ const tagListModel:TagListModel = {
             }   
         }
         this.data.splice(index,1)
-        this.save()
-        
+        this.save() 
         return true
+    },
+    save(){
+        window.localStorage.setItem(localStorageKeyName, JSON.stringify(this.data));
     }
-
 };
 
 export default tagListModel

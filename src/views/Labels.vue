@@ -6,7 +6,7 @@
                 v-for="tag in tags" :key="tag.id"
                 :to='`/labels/edit/${tag.id}`'
                 >
-                {{tag.name}}
+                <span>{{tag.name}}</span>
             <Icon name='星星'/>
             </router-link>
             <div @click="createTag">
@@ -22,21 +22,20 @@ import {Component} from 'vue-property-decorator'
 import tagListModel from '@/model/tagListModel'
 import Button from '@/components/Button.vue'
 
-
+tagListModel.fetch()
 @Component({components:{Button}})
 export default class Labels extends Vue{
     tags = tagListModel.data;
     createTag(){
         const name = window.prompt('请输入标签名')
         if(name){
-            const x = tagListModel.create(name)
-            if(x === 'duplicated'){
+            const message = tagListModel.create(name)
+            if(message === 'duplicated'){
                 alert('输入了重复的标签名')
-            }
+            }else if (message === 'success') {
+          window.alert('添加成功');
         }
-    }
-    created(){
-        tagListModel.fetch()
+        }
     }
 }
 </script>

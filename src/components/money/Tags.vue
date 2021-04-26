@@ -4,35 +4,25 @@
         <ul class="current" v-if="tagsType === '-'">
 
             <li :class="{selected:selectedTags.indexOf(item)>=0}"
-            v-for="item in dataSource" :key="item.id" @click="select(item)">
+            v-for="item in payData" :key="item.id" @click="select(item)">
             {{item}}   
-            <Icon :name='`${item}`'/>
+            <Icon :name='`${item.name}`'/>
             </li>
-            <li :class="{selected:selectedTags.indexOf(item)>=0}" 
-                v-for="item in newData" :key="item" @click="select(item)">
-                {{item}}
-                <Icon name='星星'/>
-            </li>
-            <div @click="create">
-                <Button button-name="新增标签" icon-name="添加"/>
+            <div @click="management">
+                <Button button-name="标签管理" icon-name="添加"/>
             </div>
             
         </ul>
-        <ul class="current" v-if="tagsType === '+'">
+        <!-- <ul class="current" v-if="tagsType === '+'">
             <li :class="{selected:selectedTags.indexOf(item)>=0}"
-            v-for="item in dataSource3" :key="item" @click="select(item)">
-            {{item}}   
+            v-for="item in incomeData" :key="item" @click="select(item)">
+            {{item}}
             <Icon :name='`${item}`'/>
-            </li>
-            <li :class="{selected:selectedTags.indexOf(item)>=0}" 
-                v-for="item in newData2" :key="item" @click="select(item)">
-                {{item}}
-                <Icon name='星星'/>
             </li>
             <div @click="create2">
                 <Button button-name="新增标签" icon-name="添加"/>
             </div>
-        </ul>
+        </ul> -->
     </div>
 </template>
 
@@ -43,11 +33,9 @@ import Button from '@/components/Button.vue'
 
 @Component({components:{Button}})
 export default class Tags extends Vue{
-    @Prop() readonly dataSource:string[] | undefined;
+    @Prop() readonly payData:string[] | undefined;
     @Prop() readonly tagsType:string[] | undefined;
-    @Prop() readonly dataSource3:string[] | undefined;
-    @Prop() readonly newData:string[] | undefined;
-    @Prop() readonly newData2:string[] | undefined;
+    @Prop() readonly incomeData:string[] | undefined;
 
     selectedTags:string[] = [];
     select(tag:string){
@@ -58,29 +46,8 @@ export default class Tags extends Vue{
         this.$emit('update:value',this.selectedTags)
     }
 
-    create(){
-        const name = window.prompt('请输入标签名')
-        if(name === ''){
-            window.alert('标签名不能为空')
-
-        }else if(name === null){
-            return
-        }
-        else if(this.newData){
-            this.$emit('update:newData',[...this.newData,name]);
-        }
-    }
-    create2(){
-        const name = window.prompt('请输入标签名')
-        if(name === ''){
-            window.alert('标签名不能为空')
-        }else if(name === null){
-            return
-        }
-        else if(this.newData2){
-            this.$emit('update:newData2',[...this.newData2,name]);
-
-        }
+    management(){
+        this.$router.push('/labels')
     }
 }
 </script>

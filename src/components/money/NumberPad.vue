@@ -59,6 +59,7 @@ export default class NumberPad extends Vue{
 
 <style lang="scss" scoped>
 @import '~@/assets/style/helper.scss';
+ $bg:#FCE300;
 .numberPad{
     .output{
         @extend %clearFix;
@@ -70,6 +71,7 @@ export default class NumberPad extends Vue{
     }
     .buttons{
         @extend %clearFix;
+       
         > button{
             width: 25%;
             height: 64px;
@@ -81,13 +83,15 @@ export default class NumberPad extends Vue{
             &.ok{
                 height: 64 * 2px;
                 float: right;
-                background: #FCE300;
+                background: $bg;
             }
             &.zero{
-                width: 25% * 2; 
+                width: 25% * 2;  
             }
-
-        }
+        }   
+    }
+    button:active{
+        background: darken(#f2f2f2, 4*2%);
     }
 }
 </style>
