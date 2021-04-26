@@ -7,7 +7,7 @@
         @update:value="onUpdateNotes"/> 
         <tags
         :data-source="tags"
-        :data-source2="RecordItem.type"
+        :tags-type="RecordItem.type"
         :data-source3="incomeTags"
         :new-data.sync="newTags"
         :new-data2.sync="newTags2"

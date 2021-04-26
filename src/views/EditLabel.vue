@@ -8,8 +8,13 @@
         </div>
         <Notes
         field-name="标签名"
-        placeholder="在这里输入标签名"/>
-        <Button class="delect" button-name="删除标签" icon-name="删除"/>
+        placeholder="在这里输入标签名"
+        @update:value="updateTag"
+        :value="tag.name"/>
+        <div @click="remove">
+            <Button class="delect" button-name="删除标签" icon-name="删除"/>
+        </div>
+        
     </Layout>
 </template>
 
@@ -24,16 +29,27 @@ import Button from '@/components/Button.vue'
     components: { Notes,Button }
 })
 export default class EditLabel extends Vue{
+    tag?:{id:string,name:string} = undefined
     created(){
         tagListModel.fetch()
         const id = this.$route.params.id
         const tags = tagListModel.data
         const tag = tags.filter(t=>t.id === id)[0]
-        if(tag){
-            console.log(tag);
-        }else{
-            this.$router.replace('/404')
+        this.tag = tag
+    }
+    updateTag(name:string) {
+        if(this.tag){
+            tagListModel.update(this.tag.id,name)
+        } 
+    }
+    remove(){
+        if(this.tag){
+            if(tagListModel.remove(this.tag.id)){
+                tagListModel.remove(this.tag.id)
+                this.$router.back()
+            }
         }
+        
     }
 }
 </script>

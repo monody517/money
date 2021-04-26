@@ -1,14 +1,13 @@
 <template>
     <div class="tags">
 
-        <ul class="current" v-if="dataSource2 === '-'">
+        <ul class="current" v-if="tagsType === '-'">
 
             <li :class="{selected:selectedTags.indexOf(item)>=0}"
             v-for="item in dataSource" :key="item.id" @click="select(item)">
             {{item}}   
             <Icon :name='`${item}`'/>
             </li>
-
             <li :class="{selected:selectedTags.indexOf(item)>=0}" 
                 v-for="item in newData" :key="item" @click="select(item)">
                 {{item}}
@@ -19,7 +18,7 @@
             </div>
             
         </ul>
-        <ul class="current" v-if="dataSource2 === '+'">
+        <ul class="current" v-if="tagsType === '+'">
             <li :class="{selected:selectedTags.indexOf(item)>=0}"
             v-for="item in dataSource3" :key="item" @click="select(item)">
             {{item}}   
@@ -45,7 +44,7 @@ import Button from '@/components/Button.vue'
 @Component({components:{Button}})
 export default class Tags extends Vue{
     @Prop() readonly dataSource:string[] | undefined;
-    @Prop() readonly dataSource2:string[] | undefined;
+    @Prop() readonly tagsType:string[] | undefined;
     @Prop() readonly dataSource3:string[] | undefined;
     @Prop() readonly newData:string[] | undefined;
     @Prop() readonly newData2:string[] | undefined;
