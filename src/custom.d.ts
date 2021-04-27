@@ -9,7 +9,7 @@ type RecordItem = {
 type recordList = {
 
 }
-type tag = {
+type Tag = {
     id:string;
     name:string
 }
