@@ -21,5 +21,8 @@ type TagListModel = {
 
   interface Window{
     tagList:tag[]
+    createTag:(name)=>void
+    removeTag:(id)=>boolean
+    upDateTag:TagListModel['update']
   }
 

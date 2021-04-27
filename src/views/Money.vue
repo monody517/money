@@ -30,14 +30,14 @@ import Notes from '@/components/money/Notes.vue'
 import Tags from '@/components/money/Tags.vue'
 import Types from '@/components/money/Types.vue'
 import recordListModel from '@/model/recordListModel'
-import tagListModel from '@/model/tagListModel'
+
 
 
 import { Component,Watch } from 'vue-property-decorator'
 
 
   const recordList = recordListModel.fetch();
-  const tagList = tagListModel.fetch();
+  const tagList = window.tagList;
 
 @Component({
     components: { NumberPad, Notes, Tags, Types }
