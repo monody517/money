@@ -29,27 +29,19 @@ import NumberPad from '@/components/money/NumberPad.vue'
 import Notes from '@/components/money/Notes.vue'
 import Tags from '@/components/money/Tags.vue'
 import Types from '@/components/money/Types.vue'
-import recordListModel from '@/model/recordListModel'
-
-
-
-import { Component,Watch } from 'vue-property-decorator'
-
-
-  const recordList = recordListModel.fetch();
-  const tagList = window.tagList;
+import { Component } from 'vue-property-decorator'
+import store from '@/store/index2'
 
 @Component({
     components: { NumberPad, Notes, Tags, Types }
 })
 export default class Money extends Vue{
     // tags = ['餐饮','购物','家居','水果','学习','房租'];
-
-    tags = window.tagList;
-    incomeTags = ['工资','兼职','理财','礼金']
-    recordList: RecordItem[] = recordList;
+    incomeTags = ['工资','兼职','理财','礼金'];
+    tags = store.tagList;  
+    recordList = store.recordList;
     record: RecordItem = {
-      tags:[''],incomeTags:[''], notes: '', type: '-', amount: 0
+      tags:[],incomeTags:[], notes: '', type: '-', amount: 0
     };
 
     onUpdateTags(value: string[]) {
@@ -65,11 +57,7 @@ export default class Money extends Vue{
         this.record.amount=parseFloat(value) 
     }
     saveRecord() {
-      recordListModel.create(this.record)
-    }
-    @Watch('recordList')
-    onRecordListChange() {
-      recordListModel.save(this.recordList);
+      store.createRecord(this.record)
     }
 
 }

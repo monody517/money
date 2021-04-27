@@ -6,6 +6,9 @@ type RecordItem = {
     amount:number
     createdAt?: Date
 }
+type recordList = {
+
+}
 type tag = {
     id:string;
     name:string
@@ -20,9 +23,13 @@ type TagListModel = {
 }
 
   interface Window{
-    tagList:tag[]
-    createTag:(name)=>void
-    removeTag:(id)=>boolean
-    upDateTag:TagListModel['update']
+      store:{
+        recordList:RecordItem[]
+        createRecord:(record:RecordItem)=>void
+        tagList:tag[]
+        createTag:(name)=>void
+        removeTag:(id)=>boolean
+        upDateTag:TagListModel['update']
+    }
   }
 

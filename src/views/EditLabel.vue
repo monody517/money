@@ -23,6 +23,7 @@ import Vue from 'vue'
 import {Component} from 'vue-property-decorator'
 import Notes from '@/components/money/Notes.vue'
 import Button from '@/components/Button.vue'
+import store from '@/store/index2'
 
 @Component({
     components: { Notes,Button }
@@ -31,18 +32,18 @@ export default class EditLabel extends Vue{
     tag?:{id:string,name:string} = undefined
     created(){
         const id = this.$route.params.id
-        const tags = window.tagList;
+        const tags = store.tagList;
         const tag = tags.filter(t=>t.id === id)[0]
         this.tag = tag
     }
     updateTag(name:string) {
         if(this.tag){
-            window.upDateTag(this.tag.id,name)
+            store.upDateTag(this.tag.id,name)
         } 
     }
     remove(){
         if(this.tag){
-            if(window.removeTag(this.tag.id)){
+            if(store.removeTag(this.tag.id)){
                 this.$router.back()
             }else{
                 alert('删除失败')
