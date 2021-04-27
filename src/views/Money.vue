@@ -30,6 +30,7 @@ import Notes from '@/components/money/Notes.vue'
 import Tags from '@/components/money/Tags.vue'
 import Types from '@/components/money/Types.vue'
 import { Component } from 'vue-property-decorator'
+import recordStore from '@/store/recordStore'
 import store from '@/store/index2'
 
 @Component({

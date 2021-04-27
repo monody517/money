@@ -39,7 +39,7 @@ export default class EditLabel extends Vue{
     updateTag(name:string) {
         if(this.tag){
             store.upDateTag(this.tag.id,name)
-        } 
+        }
     }
     remove(){
         if(this.tag){
