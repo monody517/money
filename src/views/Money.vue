@@ -45,7 +45,7 @@ import { Component,Watch } from 'vue-property-decorator'
 export default class Money extends Vue{
     // tags = ['餐饮','购物','家居','水果','学习','房租'];
 
-    tags = tagList;
+    tags = window.tagList;
     incomeTags = ['工资','兼职','理财','礼金']
     recordList: RecordItem[] = recordList;
     record: RecordItem = {
