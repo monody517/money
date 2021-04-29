@@ -11,7 +11,7 @@
         :income-data="incomeTags"
         @update:newData="onUpdateTags"
         @update:newData2="onUpdateTags2"/>
-        <Tabs :data-source='record.type'/>
+        <Tabs :data-source='typeList' :value.sync="record.type"/>
     </Layout>
 </template>
 
@@ -30,6 +30,7 @@ import Notes from '@/components/money/Notes.vue'
 import Tags from '@/components/money/Tags.vue'
 import Tabs from '@/components/Tabs.vue'
 import { Component } from 'vue-property-decorator'
+import typeList from '@/consts/typeList'
 
 
 @Component({
@@ -49,6 +50,7 @@ export default class Money extends Vue{
     created() {
       this.$store.commit('fetchRecords')  
     }
+    typeList = typeList
     onUpdateTags(value: string[]) {
       this.record.tags = value;
     }
