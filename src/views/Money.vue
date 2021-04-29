@@ -11,7 +11,7 @@
         :income-data="incomeTags"
         @update:newData="onUpdateTags"
         @update:newData2="onUpdateTags2"/>
-        <types :value.sync='record.type'/>
+        <Tabs :data-source='record.type'/>
     </Layout>
 </template>
 
@@ -28,23 +28,26 @@ import Vue from 'vue'
 import NumberPad from '@/components/money/NumberPad.vue'
 import Notes from '@/components/money/Notes.vue'
 import Tags from '@/components/money/Tags.vue'
-import Types from '@/components/money/Types.vue'
+import Tabs from '@/components/Tabs.vue'
 import { Component } from 'vue-property-decorator'
 
 
 @Component({
-    components: { NumberPad, Notes, Tags, Types }
+    components: { NumberPad, Notes, Tags, Tabs }
 })
 export default class Money extends Vue{
     // tags = ['餐饮','购物','家居','水果','学习','房租'];
     incomeTags = ['工资','兼职','理财','礼金'];
-    // tags = store.tagList;  
+    tags = this.$store.state.tagList;  
     // recordList = store.recordList;
     record: RecordItem = {
       tags:[],incomeTags:[], notes: '', type: '-', amount: 0
     };
+    beforeCreate() {
+      this.$store.commit('fetchTags')
+    }
     created() {
-      this.$store.commit('fetchRecords')
+      this.$store.commit('fetchRecords')  
     }
     onUpdateTags(value: string[]) {
       this.record.tags = value;
