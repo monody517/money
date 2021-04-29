@@ -2,27 +2,27 @@
     <div class="tags">
 
         <ul class="current" v-if="tagsType === '-'">
-
             <li :class="{selected:selectedTags.indexOf(item)>=0}"
             v-for="item in payData" :key="item.id" @click="select(item)">
-            {{item}}   
+            {{item.name}}   
             <Icon :name='`${item.name}`'/>
             </li>
             <div @click="management">
                 <Button button-name="标签管理" icon-name="添加"/>
             </div>
-            
         </ul>
-        <!-- <ul class="current" v-if="tagsType === '+'">
+
+        <ul class="current" v-if="tagsType === '+'">
             <li :class="{selected:selectedTags.indexOf(item)>=0}"
-            v-for="item in incomeData" :key="item" @click="select(item)">
-            {{item}}
-            <Icon :name='`${item}`'/>
+            v-for="item in payData" :key="item.id" @click="select(item)">
+            {{item.name}}   
+            <Icon :name='`${item.name}`'/>
             </li>
-            <div @click="create2">
-                <Button button-name="新增标签" icon-name="添加"/>
+            <div @click="management">
+                <Button button-name="标签管理" icon-name="添加"/>
             </div>
-        </ul> -->
+        </ul>
+
     </div>
 </template>
 
@@ -45,7 +45,6 @@ export default class Tags extends Vue{
         this.selectedTags.push(tag)
         this.$emit('update:value',this.selectedTags)
     }
-
     management(){
         this.$router.push('/labels')
     }
@@ -81,12 +80,12 @@ export default class Tags extends Vue{
             border: 1px solid #c9c9c9;
             .icon{
                 width: 50px;
-                height: 25px;   
-
+                height: 25px;
             }
 
             &.selected{
                 background: darken(#d9d9d9,50%);
+                color:white
             }
         }
         > .new{

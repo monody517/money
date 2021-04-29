@@ -37,10 +37,9 @@ import typeList from '@/consts/typeList'
     components: { NumberPad, Notes, Tags, Tabs }
 })
 export default class Money extends Vue{
-    // tags = ['餐饮','购物','家居','水果','学习','房租'];
-    incomeTags = ['工资','兼职','理财','礼金'];
-    tags = this.$store.state.tagList;  
-    // recordList = store.recordList;
+    
+    incomeTags = [];
+    tags = this.$store.state.tagList;
     record: RecordItem = {
       tags:[],incomeTags:[], notes: '', type: '-', amount: 0
     };
@@ -66,7 +65,6 @@ export default class Money extends Vue{
     saveRecord() {
       this.$store.commit('createRecord',this.record)
     }
-
 }
 </script>
 

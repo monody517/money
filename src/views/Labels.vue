@@ -7,7 +7,7 @@
                 :to='`/labels/edit/${tag.id}`'
                 >
                 <span>{{tag.name}}</span>
-            <Icon name='星星'/>
+            <Icon :name='findName(tag.name)'/>
             </router-link>
             <div @click="createTag">
                 <Button button-name="新增标签" icon-name="添加"/>
@@ -20,6 +20,7 @@
 import Vue from 'vue'
 import {Component} from 'vue-property-decorator'
 import Button from '@/components/Button.vue'
+import findTagName from '@/lib/findTagName'
 
 
 
@@ -31,16 +32,21 @@ import Button from '@/components/Button.vue'
         }
     }
 })
-export default class Labels extends Vue{
+export default class Labels extends Vue{ 
     created() {
-      this.$store.commit('fetchTags')
+      this.$store.commit('fetchTags')  
     }
     createTag(){
         const name = window.prompt('请输入标签名')
         if(name){
             this.$store.commit('createTag',name)
         }
+    }   
+    findName(name:string){
+        findTagName(name) 
     }
+
+    
 }
 </script>
 
