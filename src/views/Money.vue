@@ -22,7 +22,7 @@ type RecordItem = {
     type:string;
     notes:string;
     amount:number
-    createdAt?: Date
+    createdAt?: string
 }
 import Vue from 'vue'
 import NumberPad from '@/components/money/NumberPad.vue'
