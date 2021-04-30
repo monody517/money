@@ -23,5 +23,6 @@
 .content{
     flex-grow: 1;
     overflow: auto;
+    background: #f7f7f7;
 }
 </style>
