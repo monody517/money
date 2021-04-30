@@ -17,10 +17,8 @@
             v-for="item in payData" :key="item.id" @click="select(item)">
             {{item.name}}   
             <Icon :name='`${item.name}`'/>
-            </li>
-            <div @click="management">
-                <Button button-name="标签管理" icon-name="添加"/>
-            </div>
+            </li>           
+            <Button @click="management" button-name="标签管理" icon-name="添加"/>
         </ul>
 
     </div>

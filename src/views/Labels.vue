@@ -7,7 +7,7 @@
                 :to='`/labels/edit/${tag.id}`'
                 >
                 <span>{{tag.name}}</span>
-            <Icon :name='findName(tag.name)'/>
+            <Icon :name='tag.name'/>
             </router-link>
             <div @click="createTag">
                 <Button button-name="新增标签" icon-name="添加"/>
@@ -20,7 +20,7 @@
 import Vue from 'vue'
 import {Component} from 'vue-property-decorator'
 import Button from '@/components/Button.vue'
-import findTagName from '@/lib/findTagName'
+
 
 
 
@@ -42,9 +42,7 @@ export default class Labels extends Vue{
             this.$store.commit('createTag',name)
         }
     }   
-    findName(name:string){
-        findTagName(name) 
-    }
+
 
     
 }
