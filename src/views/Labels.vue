@@ -42,9 +42,6 @@ export default class Labels extends Vue{
             this.$store.commit('createTag',name)
         }
     }   
-
-
-    
 }
 </script>
 

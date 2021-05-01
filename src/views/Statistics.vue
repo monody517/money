@@ -4,8 +4,7 @@
 
             <ol>
                 <li v-for="(group,index) in groupedList" :key="index">
-                    <h3 class="title">{{beautify(group.title)}}<span>￥{{group.total}}</span></h3>
-                    
+                    <h3 class="title">{{beautify(group.title)}}<span>￥{{group.total}}</span></h3> 
                     <ol>
                         <li v-for="item in group.items" :key="item.id" class="record">
                             <span>{{tagString(item.tags).name}}</span>
@@ -33,16 +32,16 @@ export default class Statistics extends Vue{
         this.$store.commit('fetchRecords')
     }
     get recordList(){
-        return (this.$store.state as RootState).recordList
-        
+        return (this.$store.state as RootState).recordList 
     }
     get groupedList(){
         const {recordList} = this
         const newRecordList = clone(recordList)
         .filter(r=>(r.type === this.type)).sort((a,b)=>dayjs(b.createdAt).valueOf()-dayjs(a.createdAt).valueOf())
+        if(newRecordList.length === 0){return [] as Result}
         type Result = {title:string,total?:number,items:RecordItem[]}[]
         const result:Result = [{title:dayjs(newRecordList[0].createdAt).format('YYYY-MM-DD'),items:[newRecordList[0]]}]
-        for(let i = 0;i<newRecordList.length;i++){
+        for(let i = 1;i<newRecordList.length;i++){
             const current = newRecordList[i]
             const last = result[result.length-1]
             if(dayjs(last.title).isSame(dayjs(current.createdAt),'day')){
@@ -50,12 +49,11 @@ export default class Statistics extends Vue{
             }else{
                 result.push({title:dayjs(newRecordList[i].createdAt).format('YYYY-MM-DD'),items:[newRecordList[i]]})
             }
-        }
+        } 
         result.map(group=>{
             group.total = group.items.reduce((sum,item)=>sum+item.amount,0)
         })
-        return result
-
+        return result  
     }
     tagString(tags:Tag[]){
         return tags[0]

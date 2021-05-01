@@ -10,7 +10,7 @@
         :tags-type="record.type"
         :income-data="incomeTags"
         @update:value="onUpdateTags"
-        @update:newData2="onUpdateTags2"/> //需要修改
+        @update:newData2="onUpdateTags2"/>
         <Tabs :data-source='typeList' :value.sync="record.type"/>
     </Layout>
 </template>
@@ -52,8 +52,6 @@ export default class Money extends Vue{
     typeList = typeList
     onUpdateTags(value: string[]) {
       this.record.tags = value;
-      console.log(value);
-      
     }
     onUpdateTags2(value: string[]) {
       this.record.incomeTags = value;

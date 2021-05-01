@@ -11,9 +11,6 @@ type RecordItem = {
     amount:number
     createdAt?: string
 }
-type recordList = {
-
-}
 type Tag = {
     id:string;
     name:string
@@ -27,14 +24,5 @@ type TagListModel = {
     save:()=>void
 }
 
-  interface Window{
-      store:{
-        recordList:RecordItem[]
-        createRecord:(record:RecordItem)=>void
-        tagList:tag[]
-        createTag:(name)=>void
-        removeTag:(id)=>boolean
-        upDateTag:TagListModel['update']
-    }
-  }
+
 
