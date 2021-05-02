@@ -4,11 +4,12 @@
         <notes 
         field-name="备注"
         placeholder="在这里输入备注"
-        @update:value="onUpdateNotes"/> 
+        :value.sync="record.notes"
+        /> 
         <tags
         :pay-data="tags"
         :tags-type="record.type"
-        :income-data="incomeTags"
+        :income-data="incomeTags" 
         @update:value="onUpdateTags"
         @update:newData2="onUpdateTags2"/>
         <Tabs :data-source='typeList' :value.sync="record.type"/>
@@ -63,7 +64,12 @@ export default class Money extends Vue{
         this.record.amount=parseFloat(value) 
     }
     saveRecord() {
+      if(this.record.tags.length === 0 || !this.record.tags){
+        window.alert('请选择一个标签')
+        return
+      }
       this.$store.commit('createRecord',this.record)
+      this.record.notes = ''
     }
 }
 </script>

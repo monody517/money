@@ -70,7 +70,7 @@ export default class Tags extends Vue{
             height: 46px;
 
             border-radius: $h/2;
-            margin-right: 20px;
+            margin-right: 15px;
             margin-top: 4px;
             flex-direction: column-reverse;
             justify-content: center;

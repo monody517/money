@@ -48,6 +48,7 @@ export default class Labels extends Vue{
 <style lang="scss" scoped>
 .tags{
     display: flex;
+    margin-left: 23px;
     flex-wrap: wrap;
     overflow: auto;
     > .tag, .new{
@@ -57,7 +58,7 @@ export default class Labels extends Vue{
         height: 46px;
         border-radius: $h/2;
         margin-right: 20px;
-        margin-top: 4px;
+        margin-top: 10px;
         flex-direction: column-reverse;
         justify-content: center;
         align-items: center;
