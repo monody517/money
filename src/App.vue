@@ -12,6 +12,10 @@ body{
   font-family: $font-hei;
   color: #333;
 }
+#app{
+  max-width: 500px;
+  margin: 0 auto;
+}
 
 
 </style>
