@@ -1,26 +1,15 @@
 <template>
     <div class="tags">
-
-        <ul class="current" v-if="tagsType === '-'">
+        <ul class="current">
             <li :class="{selected:selectedTags.indexOf(item)>=0}"
             v-for="item in payData" :key="item.id" @click="select(item)">
-            {{item.name}}   
+            {{item.name}}
             <Icon :name='`${item.name}`'/>
             </li>
             <div @click="management">
                 <Button button-name="标签管理" icon-name="添加"/>
             </div>
         </ul>
-
-        <ul class="current" v-if="tagsType === '+'">
-            <li :class="{selected:selectedTags.indexOf(item)>=0}"
-            v-for="item in payData" :key="item.id" @click="select(item)">
-            {{item.name}}   
-            <Icon :name='`${item.name}`'/>
-            </li>           
-            <Button @click="management" button-name="标签管理" icon-name="添加"/>
-        </ul>
-
     </div>
 </template>
 
@@ -33,7 +22,6 @@ import Button from '@/components/Button.vue'
 export default class Tags extends Vue{
     @Prop() readonly payData:string[] | undefined;
     @Prop() readonly tagsType:string[] | undefined;
-    @Prop() readonly incomeData:string[] | undefined;
 
     selectedTags:string[] = [];
     select(tag:string){
@@ -42,7 +30,9 @@ export default class Tags extends Vue{
         }
         this.selectedTags.push(tag)
         this.$emit('update:value',this.selectedTags)
+        console.log(tag);   
     }
+
     management(){
         this.$router.push('/labels')
     }
@@ -93,7 +83,6 @@ export default class Tags extends Vue{
                 padding: 0 4px;
             }
         }
-    }
-    
+    }   
 }
 </style>

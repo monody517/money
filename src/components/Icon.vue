@@ -12,7 +12,7 @@ import {Component,Prop} from 'vue-property-decorator'
 @Component
 export default class Icon extends Vue {
   @Prop(String) name!:String
-  existTags = ['添加','labels','money','statistics','餐饮','购物','家居','水果','学习','房租','工资','兼职','理财','礼金'];
+  existTags = ['left','添加','labels','money','statistics','餐饮','购物','家居','水果','学习','房租','工资','兼职','理财','礼金'];
   findTagName(name:string){
     if(this.existTags.indexOf(name)>=0){
       return name

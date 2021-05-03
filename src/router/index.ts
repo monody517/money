@@ -27,12 +27,12 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: '/labels/edit/:id',
-    component: EditLabel
+    component: EditLabel, 
   },
   {
     path:'*',
     component: Notfound
-  }
+  },
 ]
 
 const router = new VueRouter({

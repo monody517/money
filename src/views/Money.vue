@@ -7,9 +7,8 @@
         :value.sync="record.notes"
         /> 
         <tags
-        :pay-data="tags"
+        :pay-data="newTagList"
         :tags-type="record.type"
-        :income-data="incomeTags" 
         @update:value="onUpdateTags"
         @update:newData2="onUpdateTags2"/>
         <Tabs :data-source='typeList' :value.sync="record.type"/>
@@ -32,6 +31,7 @@ import Tags from '@/components/money/Tags.vue'
 import Tabs from '@/components/Tabs.vue'
 import { Component } from 'vue-property-decorator'
 import typeList from '@/consts/typeList'
+import clone from '@/lib/clone'
 
 
 @Component({
@@ -41,6 +41,11 @@ export default class Money extends Vue{
     
     incomeTags = [];
     tags = this.$store.state.tagList;
+    get newTagList(){
+      const {tags} = this
+      const result = clone(tags).filter((t:Tag)=>(t.type === this.record.type))
+      return result
+    }
     record: RecordItem = {
       tags:[],incomeTags:[], notes: '', type: '-', amount: 0
     };
@@ -79,12 +84,4 @@ export default class Money extends Vue{
         display: flex;
         flex-direction: column-reverse;
     }
-</style>
-
-<style lang="scss" scoped>
-
-
-
-
-
 </style>
