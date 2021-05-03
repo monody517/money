@@ -89,7 +89,7 @@ export default class Labels extends Vue{
     }
     .createdTag{
         display: flex;
-        background: #FCE300;
+        background: #fbaa00;
         padding: 15px 0;
         
         span{

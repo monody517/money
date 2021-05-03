@@ -1,27 +1,36 @@
 <template>
     <nav>
-      <router-link to="/money" class="item" active-class="select">
-      <Icon name='money'/>记账
+      <router-link to="/money" class="item" @click="selected" active-class="select">
+      <Icon name='money1'/>记账
       </router-link>
       <router-link to="/labels" class="item" active-class="select">
-        <Icon name='labels'/>标签
+        <Icon name='labels1'/>标签
       </router-link>
       <router-link to="/statistics" class="item" active-class="select">
-        <Icon name='statistics'/>统计
+        <Icon name='statistics1'/>统计
       </router-link>
     </nav>
 </template>
 
 <script lang="ts">
-    export default {
-        name: 'Nav'
+import Vue from 'vue'
+import {Component} from 'vue-property-decorator'
+@Component
+export default class Nav extends Vue {
+    selected(){
+        let number = 1
+        if(number === 1){
+            number = 2
+        }else if(number === 2){
+            number = 1
+        }
     }
+}
 </script>
 
 <style lang="scss" scoped>
 @import "~@/assets/style/helper.scss";
 nav{
-    border-top: 1px solid red;
     display: flex;
     >.item{
         padding: 2px 0;
@@ -36,7 +45,7 @@ nav{
         }
     }
     > .item.select{
-        color: $color-highlight;
+        color:#fbaa00;
     }
 }
 

@@ -59,7 +59,7 @@ export default class NumberPad extends Vue{
 
 <style lang="scss" scoped>
 @import '~@/assets/style/helper.scss';
- $bg:#FCE300;
+ $bg:#fbaa00;
 .numberPad{
     .output{
         @extend %clearFix;
