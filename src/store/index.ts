@@ -39,7 +39,11 @@ const store = new Vuex.Store({
         store.commit('createTag',{name:'家居',type:'-'})
         store.commit('createTag',{name:'水果',type:'-'})
         store.commit('createTag',{name:'学习',type:'-'})
-        store.commit('createTag',{name:'房租',type:'-'}) 
+        store.commit('createTag',{name:'房租',type:'-'})
+        store.commit('createTag',{name:'工资',type:'+'})
+        store.commit('createTag',{name:'兼职',type:'+'})
+        store.commit('createTag',{name:'礼金',type:'+'})
+        store.commit('createTag',{name:'理财',type:'+'})
       }
     },
     findTag(state,id: string) {
