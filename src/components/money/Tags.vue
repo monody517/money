@@ -50,7 +50,7 @@ export default class Tags extends Vue{
         display: flex;
         flex-wrap: wrap;
         overflow: hidden;
-        height: 150px;
+        height: 100px;
         overflow: auto;
 
         > li{

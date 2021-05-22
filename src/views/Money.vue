@@ -2,6 +2,12 @@
     <Layout class-prefix="layout">
         <number-pad @update:value="onUpdateAmount" @submit="saveRecord"/>
         <notes 
+        field-name="日期"
+        placeholder="在这里输入日期"
+        type='datetime-local'
+        :value.sync="record.createdAt"
+        />
+        <notes 
         field-name="备注"
         placeholder="在这里输入备注"
         :value.sync="record.notes"
@@ -9,8 +15,7 @@
         <tags
         :pay-data="newTagList"
         :tags-type="record.type"
-        @update:value="onUpdateTags"
-        @update:newData2="onUpdateTags2"/>
+        @update:value="onUpdateTags"/>
         <Tabs :data-source='typeList' :value.sync="record.type"/>
     </Layout>
 </template>
@@ -18,7 +23,6 @@
 <script lang="ts">
 type RecordItem = {
     tags:string[];
-    incomeTags:string[];
     type:string;
     notes:string;
     amount:number
@@ -47,7 +51,7 @@ export default class Money extends Vue{
       return result
     }
     record: RecordItem = {
-      tags:[],incomeTags:[], notes: '', type: '-', amount: 0
+      tags:[], notes: '', type: '-', amount: 0, createdAt:new Date().toISOString()
     };
     beforeCreate() {
       this.$store.commit('fetchTags')
@@ -58,9 +62,6 @@ export default class Money extends Vue{
     typeList = typeList
     onUpdateTags(value: string[]) {
       this.record.tags = value;
-    }
-    onUpdateTags2(value: string[]) {
-      this.record.incomeTags = value;
     }
     onUpdateNotes(value: string) {
       this.record.notes = value;
