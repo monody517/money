@@ -6,16 +6,15 @@
 
 <script lang="ts">
 import {Component,Prop,Vue} from 'vue-property-decorator'
-import echarts, { EChartsOption } from 'echarts';
-    console.log(echarts);
+import echarts from 'echarts';
 @Component
+
 export default class Chart extends Vue{
-    @Prop() options?:EChartsOption
+    @Prop() options?:any
     mounted(){
         if(this.options === undefined){
             return
         }
-        console.log(echarts);
         const chart = echarts.init(this.$refs.wrapper as HTMLDivElement)
         chart.setOption(this.options)
     }

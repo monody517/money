@@ -69,6 +69,7 @@ export default class Labels extends Vue{
         flex-wrap: wrap;
         overflow: hidden;
         flex-grow: 1;
+        align-content: flex-start;
         > .tag{
             display: flex;
             $h:24px;

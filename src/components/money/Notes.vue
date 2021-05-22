@@ -2,7 +2,7 @@
     <div>
         <label class="notes">
             <span>{{fieldName}}</span>
-            <template v-if="type === 'datetime-local'">
+            <template v-if="type === 'date'">
                 <input :type="type || 'text'" :placeholder='placeholder'
                 :value="x(value)" @input="onValueChange($event.target.value)" 
                 >
@@ -31,7 +31,7 @@ export default class Notes extends Vue{
         this.$emit('update:value',value)
     }
     x(isoString:string){
-       return dayjs(isoString).format("YYYY-MM-DDTHH:mm:ss")  
+       return dayjs(isoString).format('YYYY-MM-DD')
     }
 }
 </script>

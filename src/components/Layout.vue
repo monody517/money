@@ -17,7 +17,7 @@
 <style lang="scss" scoped>
 .layout-wrapper{
     display: flex;
-    min-height: 100vh;
+    height: 100vh;
     flex-direction: column;
 }
 .content{

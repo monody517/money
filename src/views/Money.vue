@@ -4,7 +4,7 @@
         <notes 
         field-name="日期"
         placeholder="在这里输入日期"
-        type='datetime-local'
+        type='date'
         :value.sync="record.createdAt"
         />
         <notes 
@@ -36,6 +36,7 @@ import Tabs from '@/components/Tabs.vue'
 import { Component } from 'vue-property-decorator'
 import typeList from '@/consts/typeList'
 import clone from '@/lib/clone'
+import dayjs from 'dayjs'
 
 
 @Component({
@@ -51,7 +52,7 @@ export default class Money extends Vue{
       return result
     }
     record: RecordItem = {
-      tags:[], notes: '', type: '-', amount: 0, createdAt:new Date().toISOString()
+      tags:[], notes: '', type: '-', amount: 0, createdAt:dayjs(new Date()).format('YYYY-MM-DD')
     };
     beforeCreate() {
       this.$store.commit('fetchTags')

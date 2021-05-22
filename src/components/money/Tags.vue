@@ -29,8 +29,7 @@ export default class Tags extends Vue{
             this.selectedTags.pop()
         }
         this.selectedTags.push(tag)
-        this.$emit('update:value',this.selectedTags)
-        console.log(tag);   
+        this.$emit('update:value',this.selectedTags) 
     }
 
     management(){

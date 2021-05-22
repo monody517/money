@@ -1,7 +1,9 @@
 <template>
     <Layout>
         <Tabs :data-source="typeList" :value.sync="type" class-prefix="type"/>
-        <Chart :options= x />
+        <div class="charts-wrapper" ref="chartWrapper">
+            <Chart class="charts" :options= x />
+        </div>
             <ol v-if="groupedList.length>0">
                 <li v-for="(group,index) in groupedList" :key="index">
                     <h3 class="title">{{beautify(group.title)}}<span>￥{{group.total}}</span></h3> 
@@ -29,23 +31,59 @@ import typeList from '@/consts/typeList'
 import dayjs from 'dayjs'
 import clone from '@/lib/clone'
 import Chart from '@/components/money/Chart.vue'
+import _ from 'lodash'
 
 @Component({components:{Tabs,Chart}})
 export default class Statistics extends Vue{
     created() {
         this.$store.commit('fetchRecords')
     }
+    mounted(){
+        const div = (this.$refs.chartWrapper as HTMLDivElement)
+        div.scrollLeft = div.scrollWidth
+    }
+    get y(){
+        const today = new Date()
+        const array = []
+        for(let i = 0;i <=29;i++){
+            const dateString = dayjs(today).subtract(i,'day').format('YYYY-MM-DD')
+            const found = _.find(this.recordList,{createdAt:dateString})
+            array.push({
+                date:dateString,
+                value:found? found.amount : 0              
+                })           
+        }
+        array.sort((a,b)=>{
+            if(a.date > b.date){
+                return 1
+            }else if(a.date === b.date){
+                return 0
+            }else{
+                return -1
+            }
+        })
+        return array
+    }
     get x() {
+
+        const keys = this.y.map(item=>item.date)
+        const values = this.y.map(item=>item.value)
         return {
+            grid:{
+                left:0,
+                right:0
+            },
              xAxis: {
                 type: 'category',
-                data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                data: keys
             },
             yAxis: {
-                type: 'value'
+                type: 'value',
+                show:false
             },
             series: [{
-                data: [150, 230, 224, 218, 135, 147, 260],
+                symbolSize:12,
+                data: values,
                 type: 'line'
             }],
             tooltip:{show:true}
@@ -128,5 +166,15 @@ export default class Statistics extends Vue{
 .noRecord{
     padding: 16px;
     text-align: center;
+}
+.charts{
+    width:430%;
+    &-wrapper{
+        overflow: auto;
+        &::-webkit-scrollbar{
+            display: none;
+        }
+    }
+    
 }
 </style>
