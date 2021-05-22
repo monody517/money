@@ -1,6 +1,7 @@
 <template>
     <Layout>
         <Tabs :data-source="typeList" :value.sync="type" class-prefix="type"/>
+        <Chart :options= x />
             <ol v-if="groupedList.length>0">
                 <li v-for="(group,index) in groupedList" :key="index">
                     <h3 class="title">{{beautify(group.title)}}<span>￥{{group.total}}</span></h3> 
@@ -27,11 +28,28 @@ import intervalList from '@/consts/intervalList'
 import typeList from '@/consts/typeList'
 import dayjs from 'dayjs'
 import clone from '@/lib/clone'
+import Chart from '@/components/money/Chart.vue'
 
-@Component({components:{Tabs}})
+@Component({components:{Tabs,Chart}})
 export default class Statistics extends Vue{
     created() {
         this.$store.commit('fetchRecords')
+    }
+    get x() {
+        return {
+             xAxis: {
+                type: 'category',
+                data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                data: [150, 230, 224, 218, 135, 147, 260],
+                type: 'line'
+            }],
+            tooltip:{show:true}
+        }
     }
     get recordList(){
         return (this.$store.state as RootState).recordList 
