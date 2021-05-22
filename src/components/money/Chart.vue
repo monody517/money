@@ -5,18 +5,24 @@
 </template>
 
 <script lang="ts">
-import {Component,Prop,Vue} from 'vue-property-decorator'
-import echarts from 'echarts';
+import {Component,Prop,Vue, Watch} from 'vue-property-decorator'
+import echarts, { ECharts, EChartsOption } from 'echarts';
 @Component
 
 export default class Chart extends Vue{
     @Prop() options?:any
+    charts?:ECharts
+
     mounted(){
         if(this.options === undefined){
             return
         }
-        const chart = echarts.init(this.$refs.wrapper as HTMLDivElement)
-        chart.setOption(this.options)
+        this.charts = echarts.init(this.$refs.wrapper as HTMLDivElement)
+        this.charts.setOption(this.options)
+    }
+    @Watch('options')
+    onOptionsChange(newValue:EChartsOption){
+        this.charts!.setOption(newValue)
     }
 }
 </script>
